@@ -8,9 +8,11 @@ const mutations = {
     'SET_STOCKS'(state, stocks){
         state.stocks = stocks
     },
-    // 'RANDOM_STOCKS' (state){
-
-    // }
+    'RANDOM_STOCKS' (state){
+        state.stocks.forEach(stock => {
+            stock.price = Math.round(stock.price * (1.7 + Math.random() - 1.1)
+        )});
+    }
 }
 
 const actions = {

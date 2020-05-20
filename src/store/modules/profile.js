@@ -1,5 +1,5 @@
 const state = {
-    funds: 8000,
+    wallet: 8000,
     stocks: []
 }
 
@@ -14,20 +14,22 @@ const mutations = {
                 quantity: quantity
             })
         }
-        state.funds -= stockPrice * quantity
+        state.wallet -= stockPrice * quantity
     },
     'SELL_STOCK'(state, { stockId, quantity, stockPrice }) {
         const record = state.stocks.find(el => el.id == stockId)
         if (record.quantity > quantity) {
             record.quantity -= quantity
         } else {
-            state.stock.splice(state.stocks.indexOf(record))
+            state.stocks.splice(state.stocks.indexOf(record))
         }
-        state.funds += stockPrice * quantity
-
+        state.wallet += stockPrice * quantity
+    },
+    'SET_PROFILE' (state, profile){
+        state.wallet = profile.wallet
+        state.stocks = profile.stockProfile ? profile.stockProfile: []
     }
 }
-
 
 const actions = {
     sellStock({ commit }, order) {
@@ -36,7 +38,7 @@ const actions = {
 }
 
 const getters = {
-    stockPortfolio(state, getters) {
+    stockProfile(state, getters) {
         return state.stocks.map(stock => {
             const record = getters.stocks.find(el => el.id == stock.id)
             return {
@@ -47,8 +49,8 @@ const getters = {
             }
         })
     },
-    funds(state) {
-        return state.funds
+    wallet(state) {
+        return state.wallet
     }
 }
 
