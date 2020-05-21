@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
     <div class="container-fluid">
       <div class="navbar-header">
         <router-link to="/" class="navbar-brand">Stockify</router-link>
@@ -15,15 +15,13 @@
           </router-link>
         </ul>
         <strong class="navbar-text navbar-right">Wallet: {{wallet | currency}}</strong>
+        <strong class="navbar-text navbar-right">Day: {{days}}</strong>
 
         <ul class="nav navbar-nav navbar-right">
           <li>
             <a href="#" @click="endDay">End Day</a>
           </li>
-          <li 
-          class="dropdown" 
-          :class="{open: isDropdown}"
-          @click="isDropdown =! isDropdown">
+          <li class="dropdown" :class="{open: isDropdown}" @click="isDropdown =! isDropdown">
             <a
               href="#"
               class="dropdown-toggle"
@@ -32,7 +30,7 @@
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Save and Load
+              Save / Load
               <span class="caret"></span>
             </a>
             <ul class="dropdown-menu">
@@ -53,11 +51,12 @@
 <script>
 import { mapActions } from "vuex";
 export default {
-    data(){
-        return{
-            isDropdown: false
-        }
-    },
+  data() {
+    return {
+      isDropdown: false,
+      days: 0
+    };
+  },
   computed: {
     wallet() {
       return this.$store.getters.wallet;
@@ -65,22 +64,24 @@ export default {
   },
   methods: {
     ...mapActions({
-        randomizeStocks: 'randomizeStocks',
-        fetchData: 'getData'
+      randomizeStocks: "randomizeStocks",
+      fetchData: "getData"
     }),
     endDay() {
       this.randomizeStocks();
+      this.days++;
     },
-    saveData(){
-        const data = {
-            wallet: this.$store.getters.wallet,
-            stockProfile: this.$store.getters.stockProfile,
-            stocks: this.$store.getters.stocks
-        }
-        this.$http.put('data.json', data)
+    saveData() {
+      const data = {
+        wallet: this.$store.getters.wallet,
+        stockProfile: this.$store.getters.stockProfile,
+        stocks: this.$store.getters.stocks
+      };
+      this.$http.put("data.json", data);
+      alert("Data Saved!");
     },
-    getData(){
-        this.fetchData()
+    getData() {
+      this.fetchData();
     }
   }
 };

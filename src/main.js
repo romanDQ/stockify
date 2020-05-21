@@ -10,9 +10,10 @@ Vue.config.productionTip = false
 Vue.use(VueRouter)
 Vue.use(VueResource)
 
+
 Vue.http.options.root = 'https://stockify-ec6e8.firebaseio.com/'
 
-Vue.filter('currency', (val) =>{
+Vue.filter('currency', (val) => {
   return '€' + val.toLocaleString()
 })
 

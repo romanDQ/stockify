@@ -9,12 +9,13 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <input 
-            type="number" 
-            class="form-control" 
-            placeholder="Quantity" 
+          <input
+            type="number"
+            class="form-control"
+            placeholder="Quantity"
             v-model="quantity"
-            :class="{danger: shortOfQuantity}">
+            :class="{danger: shortOfQuantity}"
+          />
         </div>
         <div class="pull-right">
           <button

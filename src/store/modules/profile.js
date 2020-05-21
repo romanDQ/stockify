@@ -25,9 +25,9 @@ const mutations = {
         }
         state.wallet += stockPrice * quantity
     },
-    'SET_PROFILE' (state, profile){
+    'SET_PROFILE'(state, profile) {
         state.wallet = profile.wallet
-        state.stocks = profile.stockProfile ? profile.stockProfile: []
+        state.stocks = profile.stockProfile ? profile.stockProfile : []
     }
 }
 
